@@ -2,7 +2,7 @@
 
 # Konfigurasi
 RAW_FILE="dotaja"  # Ubah path sesuai lokasi file RAW
-TARGET_DISK="/dev/vda2"            # Sesuaikan dengan disk utama VPS
+TARGET_DISK="/dev/vda"            # Sesuaikan dengan disk utama VPS
 
 # Pastikan script dijalankan sebagai root
 if [[ $EUID -ne 0 ]]; then

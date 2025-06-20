@@ -1,37 +1,56 @@
 #!/bin/bash
 
-# Warna
-RED='\033[1;31m'
+# Warna ANSI
 GREEN='\033[1;32m'
-BLUE='\033[1;34m'
+CYAN='\033[1;36m'
+RED='\033[1;31m'
 RESET='\033[0m'
 
 # ASCII Art untuk "DOT"
 DOT=(
-    "██████╗  ██████╗ ████████╗"
-    "██╔══██╗██╔═══██╗╚══██╔══╝"
-    "██████╔╝██║   ██║   ██║   "
-    "██╔═══╝ ██║   ██║   ██║   "
-    "██║     ╚██████╔╝   ██║   "
-    "╚═╝      ╚═════╝    ╚═╝   "
+    "██████╗   ██████╗ ████████╗"
+    "██╔══██╗ ██╔═══██╗╚══██╔══╝"
+    "██║  ██║ ██║   ██║   ██║   "
+    "██║  ██║ ██║   ██║   ██║   "
+    "██████╔╝ ╚██████╔╝   ██║   "
+    "╚═════╝   ╚═════╝    ╚═╝   "
 )
 
-# Fungsi untuk menampilkan huruf besar "DOT" dengan animasi
+# Efek teks acak seperti hacker
+random_text() {
+    local chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()"
+    for ((i = 0; i < $1; i++)); do
+        echo -n "${chars:RANDOM%${#chars}:1}"
+    done
+    echo
+}
+
+# Fungsi animasi "DOT"
 animate_dot() {
-    local delay=0.1
+    local delay=0.05
+    local cols=$(tput cols) # Lebar terminal
+    local rows=$(tput lines) # Tinggi terminal
+
     while true; do
-        for color in "${RED}" "${GREEN}" "${BLUE}"; do
-            clear
-            for line in "${DOT[@]}"; do
-                echo -e "${color}${line}${RESET}"
-            done
+        clear
+        # Menampilkan teks acak di atas dan bawah
+        for ((i = 0; i < rows / 2 - 4; i++)); do
+            echo -e "${CYAN}$(random_text $cols)${RESET}"
+        done
+
+        # Menampilkan ASCII Art DOT dengan warna berkedip
+        for line in "${DOT[@]}"; do
+            echo -e "${RED}${line}${RESET}"
             sleep $delay
         done
+
+        for ((i = 0; i < rows / 2 - 4; i++)); do
+            echo -e "${CYAN}$(random_text $cols)${RESET}"
+        done
+
+        sleep $delay
     done
 }
 
-# Menjalankan animasi
-clear
-echo -e "${BLUE}Memulai animasi DOT dalam ukuran besar...${RESET}"
-sleep 1
+# Jalankan animasi
 animate_dot

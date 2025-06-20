@@ -16,7 +16,7 @@ DOT=(
     "╚═════╝   ╚═════╝    ╚═╝   "
 )
 
-# Efek teks acak seperti hacker
+# Fungsi untuk membuat teks acak
 random_text() {
     local chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()"
     for ((i = 0; i < $1; i++)); do
@@ -25,32 +25,43 @@ random_text() {
     echo
 }
 
-# Fungsi animasi "DOT"
+# Fungsi untuk animasi "DOT" bergerak
 animate_dot() {
-    local delay=0.05
-    local cols=$(tput cols) # Lebar terminal
-    local rows=$(tput lines) # Tinggi terminal
+    local cols=$(tput cols)   # Lebar terminal
+    local rows=$(tput lines)  # Tinggi terminal
+    local text_width=${#DOT[0]}
+    local text_start=0
+    local text_direction=1
+    local delay=0.1
 
     while true; do
         clear
-        # Menampilkan teks acak di atas dan bawah
-        for ((i = 0; i < rows / 2 - 4; i++)); do
+
+        # Menampilkan teks acak di atas "DOT"
+        for ((i = 0; i < rows / 2 - 3; i++)); do
             echo -e "${CYAN}$(random_text $cols)${RESET}"
         done
 
-        # Menampilkan ASCII Art DOT dengan warna berkedip
+        # Menampilkan "DOT" bergerak
         for line in "${DOT[@]}"; do
+            printf "%${text_start}s" " "
             echo -e "${RED}${line}${RESET}"
-            sleep $delay
         done
 
-        for ((i = 0; i < rows / 2 - 4; i++)); do
+        # Menampilkan teks acak di bawah "DOT"
+        for ((i = 0; i < rows / 2 - 3; i++)); do
             echo -e "${CYAN}$(random_text $cols)${RESET}"
         done
+
+        # Memindahkan posisi "DOT" (kiri-kanan)
+        text_start=$((text_start + text_direction))
+        if ((text_start < 0 || text_start + text_width > cols)); then
+            text_direction=$((text_direction * -1))
+        fi
 
         sleep $delay
     done
 }
 
-# Jalankan animasi
+# Menjalankan animasi
 animate_dot

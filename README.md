@@ -10,6 +10,6 @@ sudo apt install ./google-chrome-stable_current_amd64.deb
 
 ```
 ```
-lspci -nnk | grep -iA2 net
+sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 ```

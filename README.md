@@ -14,3 +14,8 @@ sudo apt update
 sudo apt install lxqt-admin lxqt-config lxqt-powermanagement
 
 ```
+```
+sudo add-apt-repository ppa:lutris-team/lutris
+sudo apt update
+sudo apt install lutris
+```

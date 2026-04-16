@@ -32,3 +32,14 @@ rm ~/test_1gb.img
 echo -ne '#######################   (100%)\r'
 echo -e "\n\e[1;35m[COMPLETE] \e[0mDisk RAM Speed Verified."
 ```
+```
+sudo apt update
+
+sudo apt install openssh-server -y
+
+sudo systemctl enable ssh
+
+sudo systemctl start ssh
+
+hostname -I
+```

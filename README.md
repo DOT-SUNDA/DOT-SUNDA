@@ -7,7 +7,12 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 ```
 ```
-sudo apt install ./google-chrome-stable_current_amd64.deb
+# Tulis kode MBR ke sektor paling depan HDD (Gagang Pintu)
+# Ini AMAN, tidak akan menyentuh data 273GB di sda1
+sudo dd if=/usr/lib/syslinux/mbr/mbr.bin of=/dev/sda
+
+# Tulis Volume Boot Record ke sda2 (Kunci Kamar)
+sudo syslinux -i /dev/sda2
 
 ```
 ```

@@ -13,7 +13,7 @@ sudo dd if=/usr/lib/syslinux/mbr/mbr.bin of=/dev/sda
 
 # Tulis Volume Boot Record ke sda2 (Kunci Kamar)
 sudo syslinux -i /dev/sda2
-
+persistent
 ```
 ```
 sudo apt update

@@ -50,5 +50,5 @@ sudo systemctl start ssh
 hostname -I
 ```
 ```
-sudo apt update && sudo apt install qt5-style-kvantum qt6-style-kvantum kvantum-manager
+sudo apt install qt5-style-kvantum qt5-style-kvantum-themes
 ```
